@@ -88,7 +88,7 @@ controller.setupWebserver(process.env.PORT, function (err, webserver) {
 controller.on('slash_command', function (slashCommand, message) {
 
     switch (message.command) {
-        case "/echo": //handle the `/echo` slash command. We might have others assigned to this app too!
+        case "/kirby": //handle the `/echo` slash command. We might have others assigned to this app too!
             // The rules are simple: If there is no text following the command, treat it as though they had requested "help"
             // Otherwise just echo back to them what they sent us.
 
@@ -103,10 +103,27 @@ controller.on('slash_command', function (slashCommand, message) {
                 return;
             }
 
+            function extractAllText(str){
+                const re = /“(.*?)”/g;
+                const result = [];
+                let current;
+                while (current = re.exec(str)) {
+                    result.push(current.pop());
+                }
+                return result.length > 0
+                    ? result
+                    : [str];
+            }
+
+            var args = extractAllText(message.text);
+            var newtext = args[1].replace(/ /g, '%20');
+
             // If we made it here, just echo what the user typed back at them
             //TODO You do it!
-            slashCommand.replyPublic(message, "1", function() {
-                slashCommand.replyPublicDelayed(message, "2").then(slashCommand.replyPublicDelayed(message, "3"));
+            slashCommand.replyPublic(message, args[0], function() {
+                // split into args
+                //
+                slashCommand.replyPublicDelayed(message, 'https://sandbox-uploads.imgix.net/u/1558598231-437fde06182dc762588e9bb4064f6721?w=600&txt=' + newtext + '&txtfit=max&txtalign=top%2C%20left&txtpad=55&txtsize=40');
             });
 
             break;

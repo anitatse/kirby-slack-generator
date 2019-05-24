@@ -1,4 +1,3 @@
-# easy-peasy-slash-command-app
-A template project to get you started writing Slack slash commands using Botkit
+# kirby-slack-generator
 
-Follow along with [Easy Peasy Slash Commands](https://medium.com/slack-developer-blog/easy-peasy-slash-commands-getting-started-c37ff3f14d3e#.nfr4px2vi)
+A very simple Slack slack command that generates customized kirby "im baby" meme onto the Slack channel
